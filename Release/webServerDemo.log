@@ -1,0 +1,3 @@
+﻿  main.cpp
+  MySocket.cpp
+D:\develop\cpp\webServerDemo\MySocket.cpp(7,17): error C4996: 'gethostbyname': Use getaddrinfo() or GetAddrInfoW() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
