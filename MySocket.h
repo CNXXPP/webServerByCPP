@@ -20,6 +20,7 @@ public:
 		return socket_ == code;
 	}
 	SOCKET socket_;
+	void SendFileBuf(std::string path);
 private:
 	static bool init_winsocket;
 };

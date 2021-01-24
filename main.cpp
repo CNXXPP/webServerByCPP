@@ -34,26 +34,10 @@ unsigned int __stdcall Connection(void* p) {
 		std::string file_name = url.substr(1, url.size() - 1);
 		std::string path = "./html/" + file_name;
 		printf("连接地址：%p 图片请求地址:%s\n", p, path.c_str());
-		FILE* fp = fopen(path.c_str(),"rb");
-		char temp[4 * 1024]; int len;
-		while (true) {
-			len = fread(temp,1, 4 * 1024, fp);
-			if (len == 0) {
-				break;
-			}
-			send(accept_socket->socket_, temp, len, 0);
-		}
+		accept_socket->SendFileBuf(path);
 	}
 	else { //默认返回
-		FILE* fp = fopen("./html/1.html", "rb");
-		char temp[4 * 1024]; int len;
-		while (true) {
-			len = fread(temp, 1, 4 * 1024, fp);
-			if (len == 0) {
-				break;
-			}
-			send(accept_socket->socket_, temp, len, 0);
-		}
+		accept_socket->SendFileBuf("./html/1.html");
 		//accept_socket->SendLine("<html><body><h1>hello world</h1><p>hello world</p></body></html>");
 	}
 	//http一次请求后就断开

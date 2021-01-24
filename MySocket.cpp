@@ -97,6 +97,22 @@ void MySocket::Close()
 {
 	closesocket(socket_);
 }
+ 
+void MySocket::SendFileBuf(std::string path)
+{
+	FILE* fp = fopen(path.c_str(), "rb");
+	if (!fp) {
+		fp = fopen("./html/404.html", "rb");
+	}
+	char temp[4 * 1024]; int len;
+	while (true) {
+		len = fread(temp, 1, 4 * 1024, fp);
+		if (len == 0) {
+			break;
+		}
+		send(socket_, temp, len, 0);
+	}
+}
 
 SocketServer::SocketServer(int port, int connections, TypeSocket type)
 {
